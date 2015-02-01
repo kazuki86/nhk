@@ -89,10 +89,12 @@ class DATABASE_CONFIG {
   public $nhk_program = array(
     'datasource' => 'NhkProgramDataSource',
     'apiKey' => '',
+    'cacheKey' => 'default',
   );
 
   public $test_nhk_program = array(
     'datasource' => 'NhkProgramDataSource',
     'apiKey' => '',
+    'cacheKey' => 'default',
   );
 }

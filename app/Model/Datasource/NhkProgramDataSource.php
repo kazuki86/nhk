@@ -23,6 +23,7 @@ class NhkProgramDataSource extends DataSource {
     'apiUrl' => 'http://api.nhk.or.jp',
     'apiVersion' => 'v1',
     'apiKey' => '',
+    'cacheKey' => '',
     );
 
   public function __construct($config) {
@@ -52,7 +53,19 @@ class NhkProgramDataSource extends DataSource {
   }
 
   protected function getData($url) {
-    $json = file_get_contents($url);
+    $json = FALSE;
+    echo $this->getCackeKey() . PHP_EOL;
+    if('' !== $this->getCackeKey()) {
+      $key = $this->getUniqueKey($url);
+      $json = Cache::read($key, $this->getCackeKey());
+      if ($json === FALSE) {
+        $json = file_get_contents($url);
+        Cache::write($key, $json, $this->getCackeKey());
+      }
+    } else {
+      $json = file_get_contents($url);
+    }
+
     $data = json_decode($json, true);
 
     return $data;
@@ -93,6 +106,14 @@ class NhkProgramDataSource extends DataSource {
 
     return $url;
 
+  }
+
+  protected function getCackeKey() {
+    return $this->config['cacheKey'];
+  }
+
+  protected function getUniqueKey($str) {
+    return md5($str);
   }
 
 //  protected $_schema = array();

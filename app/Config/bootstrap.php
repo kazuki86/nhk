@@ -24,6 +24,10 @@
 
 // Setup a 'default' cache configuration for use in the application.
 Cache::config('default', array('engine' => 'File'));
+Cache::config('nhk_api_cache', array(
+  'engine' => 'File',
+  'duration' => 7200, // 2 hours
+));
 
 /**
  * The settings below can be used to set additional paths to models, views and controllers.
