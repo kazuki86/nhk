@@ -85,4 +85,14 @@ class DATABASE_CONFIG {
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);
+
+  public $nhk_program = array(
+    'datasource' => 'NhkProgramDataSource',
+    'apiKey' => '',
+  );
+
+  public $test_nhk_program = array(
+    'datasource' => 'NhkProgramDataSource',
+    'apiKey' => '',
+  );
 }
