@@ -1,7 +1,10 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('Util', 'Lib');
 
 class NhkProgramListController extends AppController {
+
+  public $uses = array('NhkProgramList', 'IcalProvide');
 
   public function index() {
     $today = date('Y-m-d');
@@ -20,16 +23,42 @@ class NhkProgramListController extends AppController {
     $this->set('genre_primary_list', $this->getGenrePrimaryList()); 
     $this->set('time_list', $this->getTimeList()); 
 
-
     $search_result = array();
     if ($this->request->is('post')) {
-      
-      $conditions = $this->request->data['NhkProgramList'];
-      $search_result = $this->NhkProgramList->search($conditions);
+      $conditions = $this->getNhkProgramListData($this->request->data);
+      if (!is_null($conditions)) {
+        $search_result = $this->NhkProgramList->search($conditions);
+      }
     }
     
     $this->set('search_result', $search_result);
 
+  }
+
+  public function icalurl() {
+
+    if ($this->request->is('post')) {
+      $icalProvideData['key'] = Util::getRandomStr();
+      $icalProvideData['conditions'] = json_encode($this->getNhkProgramListData($this->request->data));
+      $icalProvideData['inserted_at'] = date('Y-m-d H:i:s',time());
+      $icalProvideData['updated_at'] = date('Y-m-d H:i:s',time());
+      $this->IcalProvide->save($icalProvideData);
+
+      $url = 'http://' . $_SERVER['HTTP_HOST'] . '/ical/fetch/' . $icalProvideData['key'];
+
+      $this->set('data', $icalProvideData);
+      $this->set('url', $url);
+    }
+  }
+
+  private function getNhkProgramListData($data) {
+    $result = null;
+    if( isset($data['NhkProgramList'])) {
+      $result = $data['NhkProgramList'];
+    } elseif( isset($data['nhk_program_list'])) {
+      $result = $data['nhk_program_list'];
+    }
+    return $result;
   }
 
   private function getServiceList() {
