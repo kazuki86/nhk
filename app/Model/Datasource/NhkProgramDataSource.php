@@ -47,14 +47,12 @@ class NhkProgramDataSource extends DataSource {
     );
     $conditions = array_merge($defaultConditions, $queryData['conditions']);
     $url = $this->getUrl($this->config, $model->useTable, $this->defaultService, $conditions);
-    echo '<pre>'.$url.'</pre>';
 
     return $this->getData($url);
   }
 
   protected function getData($url) {
     $json = FALSE;
-    echo $this->getCackeKey() . PHP_EOL;
     if('' !== $this->getCackeKey()) {
       $key = $this->getUniqueKey($url);
       $json = Cache::read($key, $this->getCackeKey());
