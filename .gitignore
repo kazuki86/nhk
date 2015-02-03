@@ -2,16 +2,16 @@
 #################################################
 /app/Config/database.php
 /app/tmp
+/app/Plugin/
+/app/vendor/
+/app/composer.lock
 /lib/Cake/Console/Templates/skel/tmp/
 /plugins
-/Plugin
 /vendors
-/vendor
 /build
 /dist
 /tags
 *.mo
-composer.lock
 
 # IDE and editor specific files #
 #################################
