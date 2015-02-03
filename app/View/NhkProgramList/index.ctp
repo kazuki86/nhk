@@ -1,37 +1,52 @@
-<h1>NHK Program List</h1>
+<h2>Now On Air</h2>
 
 
 <?php if (empty($now_on_air)): ?>
   <div>there are no data</div>
 <?php else: ?>
 
-<ul>
 <?php foreach ($now_on_air as $service_id => $now_list) : ?>
-  <h2 id = "<?php echo $service_id; ?>"><?php echo $now_list['previous']['service']['name']; ?></h2>
-  <table>
-    <tr>
-      <th></th>
-      <th>image</th>
-      <th>program name </th>
-    </tr>
-<?php foreach ($now_list as $kind =>$elem) : ?>
-    <tr>
-    <td>
-      <?php echo $kind; ?>
-    </td>
-    <td>
-    <img src='<?php echo $elem['service']['logo_s']['url']; ?>' />
-    </td>
-    <td>
-      <?php echo $elem['title']; ?><br>
-      <?php echo $elem['subtitle']; ?><br>
-      <?php echo $elem['service']['name']; ?><br>
-      from:<?php echo $elem['start_time']; ?><br>
-      to:<?php echo $elem['end_time']; ?>
-    </td>
-    </tr>
+<div class='well well-sm' style='margin-top:20px;'>
+  <h3 id = "<?php echo $service_id; ?>"><?php echo $now_list['previous']['service']['name']; ?></h3>
+</div>
+<div class='row'>
+<?php foreach ($now_list as $time => $elem) : ?>
+  <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
+    <div class='thumbnail'>
+      <?php if ($time === 'present'): ?>
+        <img src='<?php echo $elem['service']['logo_s']['url']; ?>' />
+        <div class='caption'>
+          <h4><?php echo $elem['title']; ?></h4>
+          <p><?php echo date('H:i',strtotime($elem['start_time'])); ?>
+            -<?php echo date('H:i',strtotime($elem['end_time'])); ?>
+          </p>
+          <p><?php echo $elem['subtitle']; ?></p>
+        </div>
+      <?php elseif ($time === 'previous'): ?>
+        <img src='<?php echo $elem['service']['logo_s']['url']; ?>'
+        style='opacity:0.3;' />
+        <div class='caption'>
+          <h5><?php echo $elem['title']; ?></h5>
+          <p><?php echo date('H:i',strtotime($elem['start_time'])); ?>
+            -<?php echo date('H:i',strtotime($elem['end_time'])); ?>
+          </p>
+        </div>
+      <?php else: ?>
+        <img src='<?php echo $elem['service']['logo_s']['url']; ?>'
+        style='opacity:0.3;' />
+        <div class='caption'>
+          <h5><?php echo $elem['title']; ?></h5>
+          <p><?php echo date('H:i',strtotime($elem['start_time'])); ?>
+            -<?php echo date('H:i',strtotime($elem['end_time'])); ?>
+          </p>
+          <p><?php echo $elem['subtitle']; ?></p>
+        </div>
+      <?php endif; ?>
+    </div>
+  </div>
 <?php endforeach; ?>
-  </table>
+</div>
+
 <?php endforeach; ?>
 <?php endif; ?>
 

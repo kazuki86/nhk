@@ -14,7 +14,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+$cakeDascription = __d('cake_dev', 'CakePHP: the rapid development php framework');
 $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 <!DOCTYPE html>
@@ -22,13 +22,20 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $cakeDescription ?>:
 		<?php echo $this->fetch('title'); ?>
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
+    // jQuery CDN
+    echo $this->Html->script('//code.jquery.com/jquery-1.10.2.min.js');
+
+    // Twitter Bootstrap 3.0 CDN
+    echo $this->Html->css('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css');
+    echo $this->Html->script('//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js');
+    echo $this->Html->script('/js/jquery.tile.min.js');
+
+		//echo $this->Html->css('cake.generic');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -36,25 +43,34 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	?>
 </head>
 <body>
-	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
-		</div>
-		<div id="content">
-
-			<?php echo $this->Session->flash(); ?>
-
-			<?php echo $this->fetch('content'); ?>
+  <div class="navbar navbar-default navbar-static-top" role="navigation">
+    <h1><a href="/nhk_program_list/">NHK番組チェック</a></h1>
+      <p class="navbar-text">NHK APIを利用した番組リマインドサービスです</p>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/nhk_program_list/search/">番組検索</a></li>
+        </ul>
+      </div>
+  </div>
+	<div id="container" class="container">
+    <div class='row'>
+      <div id="content" class='col-md-9 col-sm-9 col-lg-9 col-xs-12'>
+        <?php echo $this->Session->flash(); ?>
+        <?php echo $this->fetch('content'); ?>
+      </div>
+      <div id="sidebar" class='col-md-3 col-sm-3 col-lg-3 hidden-xs'
+      style='padding-top:80px;'>
+        <a class="twitter-timeline" href="https://twitter.com/hashtag/nhk"
+        data-widget-id="562643771599233024" height='2000px'>#nhk のツイート</a>
+        <script>!function(d,s,id){var
+        js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </div>
 		</div>
 		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
-				);
-			?>
-			<p>
-				<?php echo $cakeVersion; ?>
+      <p>「情報提供:ＮＨＫ」</p>
+      <hr>
+			<p class='text-right'>
+        Copyright &copy; 2015 Kazuki.M All right received.
 			</p>
 		</div>
 	</div>
