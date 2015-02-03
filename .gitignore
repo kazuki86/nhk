@@ -4,11 +4,14 @@
 /app/tmp
 /lib/Cake/Console/Templates/skel/tmp/
 /plugins
+/Plugin
 /vendors
+/vendor
 /build
 /dist
 /tags
 *.mo
+composer.lock
 
 # IDE and editor specific files #
 #################################

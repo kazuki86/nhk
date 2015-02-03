@@ -116,7 +116,6 @@ class NhkProgramDataSource extends DataSource {
 
   protected function getCacheKey($tableName) {
 
-    var_dump($this->config);
     if (isset($this->config['cacheKeys'][$tableName])) {
       return $this->config['cacheKeys'][$tableName];
     } else {
