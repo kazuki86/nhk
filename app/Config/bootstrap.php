@@ -28,6 +28,10 @@ Cache::config('nhk_api_cache', array(
   'engine' => 'File',
   'duration' => 7200, // 2 hours
 ));
+Cache::config('nhk_api_cache_rapid', array(
+  'engine' => 'File',
+  'duration' => 60, // 1 min
+));
 
 /**
  * The settings below can be used to set additional paths to models, views and controllers.

@@ -4,17 +4,15 @@ App::uses('Util', 'Lib');
 
 class NhkProgramListController extends AppController {
 
-  public $uses = array('NhkProgramList', 'IcalProvide');
+  public $uses = array('NhkProgramList', 'IcalProvide', 'NowOnAir');
 
   public function index() {
-    $today = date('Y-m-d');
 
-    $conditions = array(
-      'date' => $today
-    );
-    $list = $this->NhkProgramList->find('all',array('conditions'=>$conditions));
+    //$list = $this->NhkProgramList->find('all');
+    $now_on_air = $this->NowOnAir->find('all');
 
-		$this->set('list', $list['list']);
+		//$this->set('list', $list['list']);
+		$this->set('now_on_air', $now_on_air['nowonair_list']);
   }
 
   public function search() {

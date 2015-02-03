@@ -23,7 +23,9 @@ class NhkProgramDataSource extends DataSource {
     'apiUrl' => 'http://api.nhk.or.jp',
     'apiVersion' => 'v1',
     'apiKey' => '',
-    'cacheKey' => '',
+    'cacheKeys' => array(
+        'default' =>'',
+      ),
     );
 
   public function __construct($config) {
@@ -43,22 +45,28 @@ class NhkProgramDataSource extends DataSource {
   public function read(Model $model, $queryData = array(), $recursive = null) {
 
     $defaultConditions = array(
+      'date' => date('Y-m-d'),
       'area' => $this->defaultArea,
     );
-    $conditions = array_merge($defaultConditions, $queryData['conditions']);
+    if (!is_null($queryData['conditions']) && is_array($queryData['conditions'])) {
+      $conditions = array_merge($defaultConditions, $queryData['conditions']);
+    } else {
+      $conditions = $defaultConditions;
+    }
     $url = $this->getUrl($this->config, $model->useTable, $this->defaultService, $conditions);
 
-    return $this->getData($url);
+    return $this->getData($url, $model);
   }
 
-  protected function getData($url) {
+  protected function getData($url, $model) {
     $json = FALSE;
-    if('' !== $this->getCackeKey()) {
+    $cacheKey = $this->getCacheKey($model->useTable);
+    if('' !== $cacheKey) {
       $key = $this->getUniqueKey($url);
-      $json = Cache::read($key, $this->getCackeKey());
+      $json = Cache::read($key, $cacheKey);
       if ($json === FALSE) {
         $json = file_get_contents($url);
-        Cache::write($key, $json, $this->getCackeKey());
+        Cache::write($key, $json,  $cacheKey);
       }
     } else {
       $json = file_get_contents($url);
@@ -106,8 +114,14 @@ class NhkProgramDataSource extends DataSource {
 
   }
 
-  protected function getCackeKey() {
-    return $this->config['cacheKey'];
+  protected function getCacheKey($tableName) {
+
+    var_dump($this->config);
+    if (isset($this->config['cacheKeys'][$tableName])) {
+      return $this->config['cacheKeys'][$tableName];
+    } else {
+      return $this->config['cacheKeys']['default'];
+    }
   }
 
   protected function getUniqueKey($str) {
