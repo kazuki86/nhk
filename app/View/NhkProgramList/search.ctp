@@ -75,7 +75,7 @@
 <?php echo $this->Form->end(); ?>
 <div class='row'>
 <?php foreach ($search_result as $elem) : ?>
-  <div class='col-xs-6 col-sm-4 col-md-3 col-lg-3'>
+  <div class='col-xs-12 col-sm-4 col-md-3 col-lg-3'>
     <div class='thumbnail'>
       <img src='<?php echo $elem['service']['logo_s']['url']; ?>' />
       <div class='caption'>

@@ -37,10 +37,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 		//echo $this->Html->css('cake.generic');
 
+
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
 </head>
 <body>
   <div class="navbar navbar-default navbar-static-top" role="navigation">
