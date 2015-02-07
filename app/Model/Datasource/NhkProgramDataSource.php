@@ -33,7 +33,7 @@ class NhkProgramDataSource extends DataSource {
   }
 
 
-  public function listSources() {
+  public function listSources($data = NULL) {
     return array(
       self::PROGRAM_LIST,
       self::PROGRAM_GENRE,
