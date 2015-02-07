@@ -22,4 +22,11 @@
 <li>「次へ」をタップします。（ユーザ名・パスワードを入力する必要はありません）</li>
 </ol>
 
+<?php echo $this->Html->link('検索画面に戻る', 
+                        array('controller'=>'nhk_program_list', 'action'=>'search'),
+                        array('class'=>'btn btn-default')
+                      );
+?>
+
+
 </ul>

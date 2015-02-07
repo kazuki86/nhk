@@ -5,12 +5,19 @@ App::uses('Util', 'Lib');
 class NhkProgramListController extends AppController {
 
   public $uses = array('NhkProgramList', 'IcalProvide', 'NowOnAir');
+  public $components = array('Security');
 
+  public function beforeFilter() {
+    $this->Security->requireAuth('icalurl');
+    $this->Security->requirePost('icalurl');
+  }
+  
   public function index() {
 
     //$list = $this->NhkProgramList->find('all');
     $now_on_air = $this->NowOnAir->find('all');
 
+    //throw new Exception('samle');
 		//$this->set('list', $list['list']);
 		$this->set('now_on_air', $now_on_air['nowonair_list']);
   }
@@ -23,6 +30,9 @@ class NhkProgramListController extends AppController {
 
     $search_result = array();
     if ($this->request->is('post')) {
+      //post の時はブラウザにキャッシュさせない。
+      //（このページに対してブラウザの戻るを実行しても期限切れ
+      $this->response->disableCache();
       $conditions = $this->getNhkProgramListData($this->request->data);
       if (!is_null($conditions)) {
         $search_result = $this->NhkProgramList->search($conditions);
@@ -34,19 +44,19 @@ class NhkProgramListController extends AppController {
   }
 
   public function icalurl() {
+    //キャッシュさせない。
+    $this->response->disableCache();
 
-    if ($this->request->is('post')) {
-      $icalProvideData['key'] = Util::getRandomStr();
-      $icalProvideData['conditions'] = json_encode($this->getNhkProgramListData($this->request->data));
-      $icalProvideData['inserted_at'] = date('Y-m-d H:i:s',time());
-      $icalProvideData['updated_at'] = date('Y-m-d H:i:s',time());
-      $this->IcalProvide->save($icalProvideData);
+    $icalProvideData['key'] = Util::getRandomStr();
+    $icalProvideData['conditions'] = json_encode($this->getNhkProgramListData($this->request->data));
+    $icalProvideData['inserted_at'] = date('Y-m-d H:i:s',time());
+    $icalProvideData['updated_at'] = date('Y-m-d H:i:s',time());
+    $this->IcalProvide->save($icalProvideData);
 
-      $url = 'http://' . $_SERVER['HTTP_HOST'] . '/ical/fetch/' . $icalProvideData['key'];
+    $url = 'http://' . $_SERVER['HTTP_HOST'] . '/ical/fetch/' . $icalProvideData['key'];
 
-      $this->set('data', $icalProvideData);
-      $this->set('url', $url);
-    }
+    $this->set('data', $icalProvideData);
+    $this->set('url', $url);
   }
 
   private function getNhkProgramListData($data) {
