@@ -4,7 +4,18 @@ class NhkProgramList extends Model {
   public $useDbConfig = 'nhk_program';
   public $useTable = 'program_list';
 
+  private $default_conditions = array(
+      'keyword' => '',
+      'service' => '',
+      'genre_primary' => '',
+      'time_from' => '',
+      'time_to' => '',
+    );
+
   public function search($conditions){
+
+    $conditions = array_merge($this->default_conditions , $conditions);
+
     $today = date('Y-m-d');
     $all = $this->find('all',array('conditions'=>array('date' => $today)));
 
