@@ -1,6 +1,6 @@
 <?php $this->set('tweet_height', '300'); ?>
-<?php echo $this->Form->create('nhk_program_list', array(
-  'url' => array('controller' => 'nhk_program_list', 'action' => 'search'),
+<?php echo $this->Form->create('NhkProgramList', array(
+  'url' => array('controller' => 'search'),
   'inputDefaults' => array(
     'div' => 'form-group',
     'label' => false,

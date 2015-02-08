@@ -1,7 +1,8 @@
-<h2>番組検索</h2>
+<?php $this->set('tweet_height', '1500'); ?>
+<?php $this->set('page_title','番組検索'); ?>
 <div>
 <?php $empty_str = '選択してください'; ?>
-<?php echo $this->Form->create('nhk_program_list', array(
+<?php echo $this->Form->create('NhkProgramList', array(
   'inputDefaults' => array(
     'div' => 'form-group',
     'label' => array(
@@ -53,7 +54,7 @@
 <?php if (count($search_result)==0): ?>
 <?php else: ?>
 
-<?php echo $this->Form->create('nhk_program_list', array(
+<?php echo $this->Form->create('NhkProgramList', array(
   'url' =>'icalurl',
   'inputDefaults' => array(
     'div' => 'form-group',

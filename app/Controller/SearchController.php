@@ -2,7 +2,7 @@
 App::uses('AppController', 'Controller');
 App::uses('Util', 'Lib');
 
-class NhkProgramListController extends AppController {
+class SearchController extends AppController {
 
   public $uses = array('NhkProgramList', 'IcalProvide', 'NowOnAir');
   public $components = array('Security');
@@ -11,24 +11,18 @@ class NhkProgramListController extends AppController {
     // これを付けないと、topからsearchメソッドが呼ばれたときにCSRFチェックされてしまう
     // 結局はsearchメソッドに対するトークンチェックは行われなくが、
     // icalurlから戻るときはチェックされてるし、いいかな。
-    $this->Security->unlockedActions = array('search');
+    $this->Security->unlockedActions = array('index');
     $this->Security->requireAuth('icalurl');
     $this->Security->requirePost('icalurl');
     parent::beforeFilter();
   }
   
-  public function index() {
-
-    //$list = $this->NhkProgramList->find('all');
+  private function nowonair() {
     $now_on_air = $this->NowOnAir->find('all');
-
-    //throw new Exception('samle');
-		//$this->set('list', $list['list']);
 		$this->set('now_on_air', $now_on_air['nowonair_list']);
   }
 
-  public function search() {
-
+  public function index() {
     $this->set('service_list', $this->getServiceList()); 
     $this->set('genre_primary_list', $this->getGenrePrimaryList()); 
     $this->set('time_list', $this->getTimeList()); 

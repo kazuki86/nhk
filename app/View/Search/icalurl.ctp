@@ -1,4 +1,5 @@
-<h2>カレンダー通知URL発行</h2>
+<?php $this->set('tweet_height', '1000'); ?>
+<?php $this->set('page_title','カレンダー通知URL発行'); ?>
 
 <p>次のURLをお好きなカレンダーアプリに登録してください</p>
 
@@ -23,7 +24,7 @@
 </ol>
 
 <?php echo $this->Html->link('検索画面に戻る', 
-                        array('controller'=>'nhk_program_list', 'action'=>'search'),
+                        array('controller'=>'search', 'action'=>'index'),
                         array('class'=>'btn btn-default')
                       );
 ?>

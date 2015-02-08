@@ -55,6 +55,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
       </div>
   </div>
 	<div id="container" class="container">
+    <?php if (isset($page_title)) : ?>
+    <h2><?php echo $page_title; ?></h2>
+    <?php endif; ?>
     <div class='row'>
       <div id="content" class='col-md-9 col-sm-9 col-lg-9 col-xs-12'>
         <?php echo $this->Session->flash(); ?>
