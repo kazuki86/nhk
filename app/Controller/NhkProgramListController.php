@@ -8,8 +8,13 @@ class NhkProgramListController extends AppController {
   public $components = array('Security');
 
   public function beforeFilter() {
+    // これを付けないと、topからsearchメソッドが呼ばれたときにCSRFチェックされてしまう
+    // 結局はsearchメソッドに対するトークンチェックは行われなくが、
+    // icalurlから戻るときはチェックされてるし、いいかな。
+    $this->Security->unlockedActions = array('search');
     $this->Security->requireAuth('icalurl');
     $this->Security->requirePost('icalurl');
+    parent::beforeFilter();
   }
   
   public function index() {
