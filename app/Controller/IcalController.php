@@ -11,12 +11,12 @@ class IcalController extends AppController {
     $this->autoRender = false;
 
     $timezone  = "Asiz/Tokyo";
-    $config    = array( "unique_id" => "kazuki86", "TZID" => $timezone );
+    $config    = array( "unique_id" => Configure::read('ical_unique_id'), "TZID" => $timezone );
     $uuid      = "3E26604A-50F4-4449-8B3E-E4F4932D05B5";
     $vcalendar = new vcalendar( $config );
     $vcalendar->setProperty( "method",        "PUBLISH" );
-    $vcalendar->setProperty( "x-wr-calname",  "CakePHP x iCal sample by kazuki86" );
-    $vcalendar->setProperty( "X-WR-CALDESC",  "Calendar object created by cakephp and iCalcreator" );
+    $vcalendar->setProperty( "x-wr-calname",  Configure::read('ical_name'));
+    $vcalendar->setProperty( "X-WR-CALDESC",  Configure::read('ical_name'));
     $vcalendar->setProperty( "X-WR-RELCALID", $uuid );
     $vcalendar->setProperty( "X-WR-TIMEZONE", $timezone );
 
@@ -36,26 +36,26 @@ class IcalController extends AppController {
         $vevent->setProperty( "dtstart", $this->getTimeArray($program_info['start_time'])); 
         $vevent->setProperty( "dtend", $this->getTimeArray($program_info['end_time'])); 
         $vevent->setProperty( "summary", $program_info['title'] );
-        $vevent->setProperty( "description", $program_info['subtitle']);
-        $vevent->setproperty( "comment", "this is a comment" );
-        $vevent->setproperty( "attendee", "attendee1@icaldomain.net" );
+        $vevent->setProperty( "description", $this->makeDescription($program_info));
+        //$vevent->setproperty( "comment", "this is a comment" );
+        //$vevent->setproperty( "attendee", "attendee1@icaldomain.net" );
 
       }
       
     }
-    /*
-    $vevent = & $vcalendar->newComponent( "vevent" );                  // create next event calendar component
-    $vevent->setProperty( "dtstart", "20150202", array("VALUE" => "DATE"));// alt. date format,//  now for an all-day event
-    $vevent->setProperty( "organizer" , "boss@icaldomain.com" );
-    $vevent->setProperty( "summary", "ALL-DAY event" );
-    $vevent->setProperty( "description", "This is a description for an all-day event" );
-    $vevent->setProperty( "resources", "COMPUTER PROJECTOR" );
-    $vevent->setProperty( "rrule", array( "FREQ" => "WEEKLY", "count" => 4));// weekly, four occasions
-    $vevent->parse( "LOCATION:1CP Conference Room 4350" );     // supporting parse of
-     */
-
     echo $vcalendar->createCalendar();
-    //echo 'hello';
+
+  }
+
+  protected function makeDescription($program_info) {
+    $description = $program_info['subtitle']
+                  .PHP_EOL
+                  .PHP_EOL
+                  .Router::url('/', true)
+                  .PHP_EOL
+                  .Configure::read('nhk_credit');
+
+    return $description;
 
   }
 
