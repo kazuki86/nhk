@@ -15,7 +15,9 @@
  */
 
 $cakeDascription = __d('cake_dev', 'CakePHP: the rapid development php framework');
-$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
+$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version());
+$site_title = Configure::read('site_title');
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,13 +48,15 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 </head>
 <body>
   <div class="navbar navbar-default navbar-static-top" role="navigation">
-    <h1><?php echo $this->Html->link(Configure::read('site_title'), '/'); ?></h1>
-      <p class="navbar-text">NHK APIを利用した番組リマインドサービスです</p>
+    <h1><?php echo $this->Html->link($site_title, '/'); ?></h1>
+    <p class="navbar-text"><?php echo $site_title; ?>はNHK APIを利用した番組リマインドサービスです</p>
+<!--
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/nhk_program_list/search/">番組検索</a></li>
         </ul>
       </div>
+-->
   </div>
 	<div id="container" class="container">
     <?php if (isset($page_title)) : ?>
