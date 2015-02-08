@@ -1,5 +1,13 @@
-<?php $this->set('tweet_height', '1500'); ?>
-<?php $this->set('page_title','番組検索'); ?>
+<?php 
+$site_title = Configure::read('site_title');
+$this->set('tweet_height', '1500'); 
+$this->set('page_title','番組検索'); 
+$this->set('title_for_layout', '検索|'.$site_title);
+$this->Html->meta('keywords', 'NHK,検索,カレンダー,リマインド', array('inline' => false));
+$this->Html->meta('description', $site_title.'はNHKの番組をカレンダーに通知するサービスです。このサイトで番組検索すると、同じ結果をあなたのお使いのカレンダーでいつでも確認できるようになります。', array('inline' => false));
+$this->Html->meta(array('name' => 'robots', 'content' => 'index,follow'),null,array('inline' => false));
+
+?>
 <div>
 <?php $empty_str = '選択してください'; ?>
 <?php echo $this->Form->create('NhkProgramList', array(

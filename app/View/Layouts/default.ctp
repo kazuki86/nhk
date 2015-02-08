@@ -23,9 +23,7 @@ $site_title = Configure::read('site_title');
 <html>
 <head>
 	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo $this->fetch('title'); ?>
-	</title>
+	<title><?php echo $title_for_layout; ?></title>
 	<?php
 		echo $this->Html->meta('icon');
 
@@ -43,13 +41,14 @@ $site_title = Configure::read('site_title');
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
+
 	?>
     <meta name="viewport" content="width=device-width, initial-scale=1" >
 </head>
 <body>
   <div class="navbar navbar-default navbar-static-top" role="navigation">
     <h1><?php echo $this->Html->link($site_title, '/'); ?></h1>
-    <p class="navbar-text"><?php echo $site_title; ?>はNHK APIを利用した番組リマインドサービスです</p>
+    <p class="navbar-text"><?php echo $site_title; ?>は気になるNHK番組をあなたのカレンダーに通知するリマインドサービスです</p>
 <!--
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">

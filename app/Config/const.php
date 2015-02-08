@@ -1,7 +1,8 @@
 <?php
 
 
-$config['site_title'] = "NHK Cheker";
+//$config['site_title'] = "NHK Cheker";
+$config['site_title'] = "NHKリマインド";
 $config['nhk_credit'] = "「情報提供:ＮＨＫ」";
 
 $config['ical_unique_id'] = 'nhk-remind_kazuki.m';

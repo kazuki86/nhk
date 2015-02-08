@@ -1,5 +1,11 @@
-<?php $this->set('tweet_height', '1000'); ?>
-<?php $this->set('page_title','カレンダー通知URL発行'); ?>
+<?php 
+$site_title = Configure::read('site_title');
+$this->set('tweet_height', '1000'); 
+$this->set('page_title','カレンダー通知URL発行');
+$this->set('title_for_layout', 'URL発行|'.$site_title);
+$this->Html->meta(array('name' => 'robots', 'content' => 'noindex,nofollow'),null,array('inline' => false));
+
+?>
 
 <p>次のURLをお好きなカレンダーアプリに登録してください</p>
 
