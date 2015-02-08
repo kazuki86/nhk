@@ -41,6 +41,8 @@ class IcalController extends AppController {
         //$vevent->setproperty( "attendee", "attendee1@icaldomain.net" );
 
       }
+      $icalProvide['IcalProvide']['last_access'] = date('Y-m-d H:i:s',time());
+      $this->IcalProvide->save($icalProvide);
       
     }
     echo $vcalendar->createCalendar();
