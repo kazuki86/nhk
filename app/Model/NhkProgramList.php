@@ -76,8 +76,9 @@ class NhkProgramList extends Model {
       }
 
     }
-    if($conditions['keyword']) {
-      $keywords = mb_split('[\s　]+',$conditions['keyword']);
+    $keyword = trim($conditions['keyword']);
+    if($keyword) {
+      $keywords = mb_split('[\s　]+',$keyword);
       $target_list[] = $program_info['title'];
       $target_list[] = $program_info['subtitle'];
       foreach ($keywords as $keyword) {
