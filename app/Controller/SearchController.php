@@ -52,7 +52,7 @@ class SearchController extends AppController {
     $icalProvideData['updated_at'] = date('Y-m-d H:i:s',time());
     $this->IcalProvide->save($icalProvideData);
 
-    $url = 'http://' . $_SERVER['HTTP_HOST'] . '/ical/fetch/' . $icalProvideData['key'];
+    $url = Router::url('/ical/fetch/' . $icalProvideData['key'], true);
 
     $this->set('data', $icalProvideData);
     $this->set('url', $url);
