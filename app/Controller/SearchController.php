@@ -118,6 +118,7 @@ class SearchController extends AppController {
       '21:00' => '21:00',
       '23:00' => '23:00',
       '25:00' => '25:00',
+      '27:00' => '27:00',
     );
     return $time_list;
 
