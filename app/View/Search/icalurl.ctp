@@ -4,7 +4,7 @@
 <p>次のURLをお好きなカレンダーアプリに登録してください</p>
 
 <div class='well'>
-<?php echo $url; ?>
+<input type='text' value='<?php echo $url; ?>' class='form-control' ></input>
 </div>
 
 <p>下記のQRコードからも上記URLを読み込めます</p>
