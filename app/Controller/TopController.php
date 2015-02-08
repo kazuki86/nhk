@@ -3,8 +3,11 @@ App::uses('AppController', 'Controller');
 
 class TopController extends AppController {
 
+  public $components = array('Security');
+
   public function index() {
 
+    /*
     $API_KEY_NHK = $this->getNhkApiKey();
     $today = date('Y-m-d');
 
@@ -13,6 +16,7 @@ class TopController extends AppController {
     $list = json_decode($list_json, true);
 
 		$this->set('list', $list['list']);
+     */
   }
 
   private function getNhkApiKey() {

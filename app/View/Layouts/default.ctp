@@ -46,7 +46,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 </head>
 <body>
   <div class="navbar navbar-default navbar-static-top" role="navigation">
-    <h1><a href="/nhk_program_list/">NHK番組チェック</a></h1>
+    <h1><?php echo $this->Html->link(Configure::read('site_title'), '/'); ?></h1>
       <p class="navbar-text">NHK APIを利用した番組リマインドサービスです</p>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -60,16 +60,16 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         <?php echo $this->Session->flash(); ?>
         <?php echo $this->fetch('content'); ?>
       </div>
-      <div id="sidebar" class='col-md-3 col-sm-3 col-lg-3 hidden-xs'
-      style='padding-top:80px;'>
-        <a class="twitter-timeline" href="https://twitter.com/hashtag/nhk"
-        data-widget-id="562643771599233024" height='2000px'>#nhk のツイート</a>
-        <script>!function(d,s,id){var
-        js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      <div id="sidebar" class='col-md-3 col-sm-3 col-lg-3 col-xs-12'>
+        <?php if (isset($tweet_height) && $tweet_height > 0) : ?>
+          <a class="twitter-timeline" href="https://twitter.com/hashtag/nhk"
+          data-widget-id="562643771599233024" height='<?php echo $tweet_height; ?>px'>#nhk のツイート</a>
+          <script>!function(d,s,id){var
+          js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        <?php endif; ?>
       </div>
 		</div>
 		<div id="footer">
-      <p>「情報提供:ＮＨＫ」</p>
       <hr>
 			<p class='text-right'>
         Copyright &copy; 2015 Kazuki.M All right received.

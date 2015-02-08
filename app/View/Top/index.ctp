@@ -1,40 +1,21 @@
-<?php if (empty($list)): ?>
-  <div>there are no data</div>
-<?php else: ?>
-
-<ul>
-<?php foreach ($list as $service_id => $glist) : ?>
-  <li>
-    <a href = "#<?php echo $service_id; ?>">
-    <?php echo $glist[0]['service']['name']; ?>
-    </a>
-  </li>
-<?php endforeach; ?>
-</ul>
-<hr />
-
-<?php foreach ($list as $service_id => $glist) : ?>
-  <h2 id = "<?php echo $service_id; ?>"><?php echo $glist[0]['service']['name']; ?></h2>
-  <table>
-    <tr>
-      <th>image</th>
-      <th>program name </th>
-    </tr>
-<?php foreach ($glist as $elem) : ?>
-    <tr>
-    <td>
-    <img src='<?php echo $elem['service']['logo_s']['url']; ?>' />
-    </td>
-    <td>
-      <?php echo $elem['title']; ?><br>
-      <?php echo $elem['subtitle']; ?><br>
-      <?php echo $elem['service']['name']; ?><br>
-      from:<?php echo $elem['start_time']; ?><br>
-      to:<?php echo $elem['end_time']; ?>
-    </td>
-    </tr>
-<?php endforeach; ?>
-  </table>
-<?php endforeach; ?>
-
-<?php endif; ?>
+<?php $this->set('tweet_height', '300'); ?>
+<?php echo $this->Form->create('nhk_program_list', array(
+  'url' => array('controller' => 'nhk_program_list', 'action' => 'search'),
+  'inputDefaults' => array(
+    'div' => 'form-group',
+    'label' => false,
+    'wrapInput' => 'input-group',
+    'class' => 'form-control'
+  ),
+  'class' => 'well'  
+)); ?>
+<?php echo $this->Form->input('keyword', array(
+  'placeholder' => 'キーワード  例）英語',
+  'afterInput' => '<span class="input-group-btn">'
+                  .$this->Form->submit('検索',array(
+                    'div' => false,
+                    'class' => 'btn btn-primary'
+                  ))
+                  . '</span>',
+)); ?>
+<?php echo $this->Form->end(); ?>

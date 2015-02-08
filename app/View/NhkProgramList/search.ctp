@@ -89,6 +89,9 @@
   </div>
 <?php endforeach; ?>
 </div>
+<div class='text-right'>
+<?php echo Configure::read('nhk_credit'); ?>
+</div>
 <?php endif; ?>
 
 <script>
