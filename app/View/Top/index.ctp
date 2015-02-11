@@ -1,11 +1,13 @@
 <?php 
 $site_title = Configure::read('site_title');
+$webmasterkey = Configure::read('webmasterkey');
 $this->set('tweet_height', '600'); 
 $this->set('page_title',$site_title.'<small>東京版</small>'); 
 $this->set('title_for_layout', 'トップ|'.$site_title);
 $this->Html->meta('description', $site_title.'はNHKの番組をカレンダーに通知するサービスです。お使いのカレンダーで黄なる番組をいつでも確認できるようになります。', array('inline' => false));
 $this->Html->meta('keywords', 'NHK,カレンダー,リマインド,API,検索', array('inline' => false));
 $this->Html->meta(array('name' => 'robots', 'content' => 'index,follow'),null,array('inline' => false));
+$this->Html->meta(array('name' => 'google-site-verification', 'content' => $webmasterkey),null,array('inline' => false));
 
 
 ?>

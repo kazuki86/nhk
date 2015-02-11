@@ -9,3 +9,5 @@ $config['ical_unique_id'] = 'nhk-remind_kazuki.m';
 $config['ical_name'] = 'NHK番組リマインド';
 
 
+//$config['webmasterkey'] = 'afOKYncT0Bi4ipc6FjrnATlOjVNUaaR0LjCZ5i-AvtI';
+$config['webmasterkey'] = '';
