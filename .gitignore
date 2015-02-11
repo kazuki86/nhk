@@ -12,6 +12,7 @@
 /dist
 /tags
 *.mo
+/app/webroot/robots.txt
 
 # IDE and editor specific files #
 #################################
