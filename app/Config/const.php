@@ -11,3 +11,6 @@ $config['ical_name'] = 'NHK番組リマインド';
 
 //$config['webmasterkey'] = 'afOKYncT0Bi4ipc6FjrnATlOjVNUaaR0LjCZ5i-AvtI';
 $config['webmasterkey'] = '';
+
+//$config['ga_tracking_id'] = 'UA-59633213-1';
+$config['ga_tracking_id'] = '';

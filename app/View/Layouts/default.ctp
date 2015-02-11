@@ -17,6 +17,7 @@
 $cakeDascription = __d('cake_dev', 'CakePHP: the rapid development php framework');
 $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version());
 $site_title = Configure::read('site_title');
+$ga_tracking_id = Configure::read('ga_tracking_id');
 
 ?>
 <!DOCTYPE html>
@@ -46,6 +47,18 @@ $site_title = Configure::read('site_title');
     <meta name="viewport" content="width=device-width, initial-scale=1" >
 </head>
 <body>
+  <?php if ($ga_tracking_id) : ?>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '<?php echo $ga_tracking_id; ?>', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  <?php endif; ?>
   <div class="navbar navbar-default navbar-static-top" role="navigation">
     <h1><?php echo $this->Html->link($site_title, '/'); ?></h1>
     <p class="navbar-text"><?php echo $site_title; ?>は気になるNHK番組をあなたのカレンダーに通知するリマインドサービスです.</p>
