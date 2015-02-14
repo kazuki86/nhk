@@ -9,11 +9,14 @@ $config['ical_unique_id'] = 'nhk-remind_kazuki.m';
 $config['ical_name'] = 'NHK番組リマインド';
 
 
-//$config['webmasterkey'] = 'afOKYncT0Bi4ipc6FjrnATlOjVNUaaR0LjCZ5i-AvtI';
-$config['webmasterkey'] = '';
+if (Configure::read('debug')) {
+  $config['webmasterkey'] = '';
+  $config['ga_tracking_id'] = '';
+} else {
+  $config['webmasterkey'] = 'afOKYncT0Bi4ipc6FjrnATlOjVNUaaR0LjCZ5i-AvtI';
+  $config['ga_tracking_id'] = 'UA-59633213-1';
+} 
 
-//$config['ga_tracking_id'] = 'UA-59633213-1';
-$config['ga_tracking_id'] = '';
 
 $config['service_list'] = array(
       'g1' => 'ＮＨＫ総合１',

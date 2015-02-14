@@ -1,7 +1,8 @@
 <?php 
 $site_title = Configure::read('site_title');
-$service_list = Configure::read('service_list');
-$service = $service_list[$service_code];
+$service_list = Configure::read('service_article');
+$service = $service_list[$service_code]['name'];
+$description = $service_list[$service_code]['description'];
 $this->set('tweet_height', '1500'); 
 $this->set('page_title',$service); 
 $this->set('title_for_layout', $service.'|'.$site_title);
@@ -11,9 +12,34 @@ $this->Html->meta(array('name' => 'robots', 'content' => 'index,follow'),null,ar
 
 ?>
 
+<h4>
+<?php echo $description; ?>
+</h4>
 <?php if (count($search_result)==0): ?>
 
 <?php else: ?>
+<?php echo $this->Form->create('NhkProgramList', array(
+  'url' => array('controller' => 'search', 'action'=>'index'),
+  'inputDefaults' => array(
+    'div' => 'form-group',
+    'label' => false,
+    'wrapInput' => 'input-group',
+    'class' => 'form-control'
+  ),
+  'class' => 'well'  
+)); ?>
+<?php echo $this->Form->input('keyword', array(
+  'label' => 'キーワードで絞る',
+  'placeholder' => 'キーワード',
+  'afterInput' => '<span class="input-group-btn">'
+                  .$this->Form->submit('検索',array(
+                    'div' => false,
+                    'class' => 'btn btn-primary'
+                  ))
+                  . '</span>',
+)); ?>
+<?php echo $this->Form->hidden('service',array('value'=>$service_code)); ?>
+<?php echo $this->Form->end(); ?>
 <div class='row'>
 <?php foreach ($search_result as $elem) : ?>
   <div class='col-xs-12 col-sm-4 col-md-3 col-lg-3'>

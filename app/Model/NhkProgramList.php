@@ -22,10 +22,14 @@ class NhkProgramList extends Model {
     $all = $all['list'];
 
     $service_cond = $conditions['service'];
-    if (!empty($conditions['service'])) {
-      $all = array(
-        $service_cond => $all[$service_cond],
-      );
+    if (!empty($conditions['service']) ) {
+      if (isset($all[$service_cond])) {
+        $all = array(
+          $service_cond => $all[$service_cond],
+        );
+      } else {
+        return array();
+      }
     }
 
     $result = array();

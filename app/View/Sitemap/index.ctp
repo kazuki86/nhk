@@ -7,5 +7,11 @@
     <loc><?php echo $this->Html->url('/search',true); ?></loc>
     <priority>0.8</priority>
   </url>
+<?php foreach($program_url_list as $url): ?>
+  <url>
+    <loc><?php echo $url; ?></loc>
+    <priority>0.3</priority>
+  </url>
+<?php endforeach; ?>
 </urlset>
 

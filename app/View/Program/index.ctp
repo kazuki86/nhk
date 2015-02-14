@@ -15,9 +15,31 @@ NHKの番組一覧です。
 </p>
 </div>
 
-<ul>
-<li><?php echo $this->Html->link('放送局一覧', array('controller'=>'program', 'action' => 'service')); ?></li>
-<li><?php echo $this->Html->link('ジャンル一覧', array('controller'=>'program', 'action' => 'genre')); ?></li>
-</ul>
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <p class="panel-title">
+      <?php echo $this->Html->link('放送波一覧', array('controller'=>'program', 'action' => 'service')); ?>
+    </p>
+  </div>
+  <div class="panel-body">
+    <small>
+      放送波で絞って番組一覧を見たい方はこちら
+    </small>
+  </div>
+</div>
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <p class="panel-title">
+      <?php echo $this->Html->link('ジャンル一覧', array('controller'=>'program', 'action' => 'genre')); ?>
+    </p>
+  </div>
+  <div class="panel-body">
+    <small>
+      番組ジャンルで絞って番組一覧を見たい方はこちら
+    </small>
+  </div>
+</div>
+
 
 
