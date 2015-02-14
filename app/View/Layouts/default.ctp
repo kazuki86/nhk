@@ -75,10 +75,10 @@ $ga_tracking_id = Configure::read('ga_tracking_id');
   <div class="navbar navbar-default navbar-static-top" role="navigation">
   <div class="container">
     <ul class="nav nav-pills">
-      <li><a href="/">Top</a></li>
-      <li><a href="/search">検索</a></li>
-      <li><a href="/program/service">放送波</a></li>
-      <li><a href="/program/genre">ジャンル</a></li>
+      <li><a href="<?php echo $this->Html->url('/'); ?>">Top</a></li>
+      <li><a href="<?php echo $this->Html->url('/search'); ?>">検索</a></li>
+      <li><a href="<?php echo $this->Html->url('/program/service'); ?>">放送波</a></li>
+      <li><a href="<?php echo $this->Html->url('/program/genre'); ?>">ジャンル</a></li>
     </ul>
   </div><!-- /.container -->
   </div>
