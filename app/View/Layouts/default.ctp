@@ -59,17 +59,31 @@ $ga_tracking_id = Configure::read('ga_tracking_id');
 
   </script>
   <?php endif; ?>
-  <div class="navbar navbar-default navbar-static-top" role="navigation">
-    <h1><?php echo $this->Html->link($site_title, '/'); ?></h1>
-    <p class="navbar-text"><?php echo $site_title; ?>は気になるNHK番組をあなたのカレンダーに通知するリマインドサービスです.</p>
-<!--
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/nhk_program_list/search/">番組検索</a></li>
-        </ul>
+  <div class="navbar navbar-default navbar-static-top" style="margin-bottom:0px;" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <div class='navbar-brand'>
+      <h1><?php echo $this->Html->link($site_title, '/',array('class' => '')); ?></h1>
       </div>
--->
+<br>
+      <p class="navbar-text"><?php echo $site_title; ?>は気になるNHK番組をあなたのカレンダーに通知するリマインドサービスです.</p>
+    </div><!-- /.navbar-header -->
+    <div class="navbar-collapse collapse">
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container -->
   </div>
+  <div class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <ul class="nav nav-pills">
+      <li><a href="/">トップ</a></li>
+      <li><a href="/search">番組検索</a></li>
+      <li><a href="/program/service">放送波一覧</a></li>
+      <li><a href="/program/genre">ジャンル一覧</a></li>
+    </ul>
+  </div><!-- /.container -->
+  </div>
+
+
 	<div id="container" class="container">
     <?php if (isset($page_title)) : ?>
     <h2><?php echo $page_title; ?></h2>
@@ -90,7 +104,7 @@ $ga_tracking_id = Configure::read('ga_tracking_id');
 		</div>
 		<div id="footer">
       <hr>
-			<p class='text-right'>
+			<p class='text-center'>
         Copyright &copy; 2015 Kazuki.M All right received.
 			</p>
 		</div>

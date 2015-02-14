@@ -38,7 +38,7 @@ $this->Html->meta(array('name' => 'robots', 'content' => 'index,follow'),null,ar
   'options' => $genre_primary_list,
 )); ?>
 <?php echo $this->Form->input('service', array(
-  'label' => array('text' => '放送局'),
+  'label' => array('text' => '放送波'),
   'empty' => $empty_str,
   'options' => $service_list,
 )); ?>

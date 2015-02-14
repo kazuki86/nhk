@@ -1,6 +1,6 @@
 <?php 
 $site_title = Configure::read('site_title');
-$genre_primary_list = Configure::read('genre_primary_list');
+$genre_primary_list = Configure::read('genre_primary_article');
 $this->set('tweet_height', '300'); 
 $this->set('page_title','ジャンル一覧'); 
 $this->set('title_for_layout', 'ジャンル一覧|'.$site_title);
@@ -16,8 +16,17 @@ NHKの番組のジャンル一覧画面です。リンクをクリックする�
 </p>
 </div>
 
-<ul>
-<?php foreach($genre_primary_list as $genre_code => $genre_name) : ?>
-<li><?php echo $this->Html->link($genre_name, array('controller'=>'program', 'action' => 'genre', $genre_code)); ?></li>
+<?php foreach($genre_primary_list as $genre_code => $genre) : ?>
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <p class="panel-title">
+      <?php echo $this->Html->link($genre['name'], array('controller'=>'program', 'action' => 'genre', $genre_code)); ?>
+    </p>
+  </div>
+  <div class="panel-body">
+<small>
+    <?php echo $genre['description']; ?>
+</small>
+  </div>
+</div>
 <?php endforeach; ?>
-</ul>
